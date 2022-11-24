@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecepieMauiSQLite.Views.RecepieListPage"
+             xmlns:models="clr-namespace:RecepieMauiSQLite.Models"
+             Title="RecepieListPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Recepie"
+                     Clicked="AddNew" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <models:RecepieModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout  BackgroundColor="{StaticResource Gray100}" >
+        <Label x:Name="statusMessage" Text="STATUS" />
+       
+            <CollectionView x:Name="recepielist" 
+                          Margin="20" 
+                          SelectionMode="Single"  
+                          SelectionChanged="OnSelectionChanged"     >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"  ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <!--Define the appearance of each item in the list-->
+                <CollectionView.ItemTemplate>
+                    
+                    <DataTemplate>
+                    <Border >
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10,10,10,10" />
+                        </Border.StrokeShape>
+                        <Grid Padding="10"  BackgroundColor="{StaticResource White}"  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"  />
+                                <ColumnDefinition Width="Auto" />
+                                
+
+                            </Grid.ColumnDefinitions>
+                            <Label     
+                                Grid.Column="0"  Grid.RowSpan="2"
+                                    Text="{Binding Emoji}" />
+                            
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" 
+                                  TextColor="{StaticResource Primary}"
+                                    FontAttributes="Bold" FontFamily="Seouig"   />
+                            
+                           <Label Grid.Row="1"  Grid.Column="1"  Text="{Binding CreatedBy}"
+                                   FontAttributes="Italic,Bold"  FontFamily="Seouig" 
+                                   VerticalOptions="End" />
+
+                            
+                            <!--Label Grid.Row="2"  Grid.Column="1" Text="{Binding Ingredients}"  
+                                    FontAttributes="None"   VerticalOptions="End" />
+                            <Label Grid.Row="3"  Grid.Column="1"  Text="{Binding Description}"
+                                    FontAttributes="None" VerticalOptions="End" />-->
+
+                         
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+      
+
+
+    </VerticalStackLayout>
+  
+</ContentPage>
